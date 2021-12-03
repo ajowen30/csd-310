@@ -25,16 +25,6 @@ try:
 
     cursor = db.cursor()
 
-    cursor.execute("SELECT team_id, team_name, mascot FROM team")
-
-    teams = cursor.fetchall()
-
-    print("\n  -- DISPLAYING TEAM RECORDS --")
-    
-    for team in teams: 
-        print("  Team ID: {}\n  Team Name: {}\n  Mascot: {}\n".format(team[0], team[1], team[2]))
-
-    
     cursor.execute("SELECT player_id, first_name, last_name, team_name FROM player INNER JOIN team ON player.team_id = team.team_id")
 
     players = cursor.fetchall()
