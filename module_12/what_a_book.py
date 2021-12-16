@@ -24,12 +24,12 @@ def show_menu():
     """ Show Menu to user and then ask them to enter their choice to view. Return their input, or exit if their input is invalid """
 
 
-    print("-----Main Menu-----")
+    print("     -----Main Menu-----")
 
-    print("     1. View Books\n     2. View Store Locations\n       3. My Account\n     4. Exit")
+
 
     try:
-        choice = int(input("\nPress: \n1 to view books\n 2 to view store locations\n 3 to view my account\n 4 to exit"))
+        choice = int(input("    Press: \n    (1) to view books\n    (2) to view store locations\n    (3) to view my account\n    (4) to exit\n"))
 
         return choice
     except ValueError:
@@ -40,28 +40,28 @@ def show_menu():
 
 def show_books(_cursor):
     """ Executing the cursor to select the chosen columns from the book table """
-    _cursor.execute("\nSELECT book_id, book_name, author, details from book")
+    _cursor.execute("\n SELECT book_id, book_name, author, details from book")
 
     books = _cursor.fetchall()
 
-    print("\n-----Displaying Book Listing-----")
+    print("\n   -----Displaying Book Listing-----")
 
     """ Displays all book names, authors, and details within the book table"""
     for book in books:
-        print(" Book Name: {}\n Author{}\n  Details{}\n".format(book[0], book[1], book[2]))
+        print("    Book Name:  {}\n    Author:     {}\n    Details:    {}\n".format(book[1], book[2], book[3]))
 
 
 def show_locations(_cursor):
     """ Executing the cursor to select the chosen columns from the store table """
-    _cursor.execute("\n SELECT store_id, local from store")
+    _cursor.execute("\n SELECT store_id, locale from store")
 
-    locations - _cursor.fetchall()
+    locations = _cursor.fetchall()
 
     print("\n-----Displaying Store Locations-----")
 
     """ Displays all locations from store table"""
     for location in locations:
-        print("  Locale: {}\n".format(location[1]))
+        print("  Location:    {}\n".format(location[1]))
 
 
 def validate_user():
@@ -85,9 +85,8 @@ def show_account_menu():
 
     try:
         print("\n --- Customer Menu ---")
-        print(" 1. Wishlist\n 2. Add Book\n 3. Main Menu")
-
-        account_option = int(input("\nPress: \n1 to view Wishlist\n 2 to add a book\n 3 to go back to the main menu"))
+        
+        account_option = int(input("\nPress: \n (1) to view Wishlist\n (2) to add a book\n (3) to go back to the main menu"))
 
         return account_option
     except ValueError:
@@ -104,12 +103,12 @@ def show_wishlist(_cursor, _user_id):
                     "INNER JOIN book ON wishlist.book_id = book.book_id " + 
                     "WHERE user.user_id = {}".format(_user_id))
 
-    show_wishlist = _cursor.fetchall()
+    wishlist = _cursor.fetchall()
 
     print("\n --- Displaying Wishlist Items ---")
 
-    for books in wishlist:
-        print(" Book Name: {}\n Author: {}\n".format(book[4], book[5]))
+    for book in wishlist:
+        print(" Book Name:     {}\n Author:        {}\n".format(book[4], book[5]))
 
 
 def show_books_to_add(_cursor, _user_id):
